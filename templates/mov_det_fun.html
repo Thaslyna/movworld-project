@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+Movie
+{% endblock %}
+{% block title %}
+MovieDetailsAndFunctions
+{% endblock %}
+{% block body %}
+
+<div class="container" style="padding-top:80px;">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-2">
+            <div class="card bg-dark" style="min-width:30rem;color:#fff;width:200px;box-shadow: 3px 4px 5px #000;align:center;">
+                <img class="card-img-top my-image" style="padding-top:15px;" height="300px" src="{{mov.poster.url}}" alt="{{mov_det.title}}"></a>
+                <div class="card-body">
+                    <h3 style="font-size:20px;font-weight:bold;">{{mov.title}}</h3>
+                    <p>{{mov.release_date}} || {{mov.category}}</p>
+                    <p>{{mov.desc}}</p>
+                <center><a href="{% url 'add_:update' mov.id %}" class="btn btn-light mt-3">Update</a></center>
+                    <center><a href="{% url 'add_:delete' mov.id %}" class="btn btn-light mt-3">Delete</a></center>
+                  <form method="post" action="">
+                {% csrf_token %}
+                <label><b>Rate:</b></label><br>
+                <input type="number" name="rating" min="0" max="5" step="1"><br>
+                <label for="review"><b>Review:</b></label><br>
+                <textarea id="review" name="comment" rows="5" cols="50" placeholder="Comment here..."></textarea>
+
+                <br>
+                <input type="submit" value="Submit">
+            </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-3">
+                   <span class="heading" style="color:#fff;font-weight:bold;">User Reviews and Ratings</span>
+<span class="fa fa-star checked" style="color:#ffff;"></span>
+<span class="fa fa-star checked" style="color:#ffff;"></span>
+<span class="fa fa-star checked" style="color:#ffff;"></span>
+<span class="fa fa-star checked" style="color:#ffff;"></span>
+<span class="fa fa-star" style="color:#ffff;"></span>
+<p></p>
+<hr style="border:3px solid #fffff">
+            {% for review in mov.review_set.all %}
+            <div class="shadow card">
+                <div class="card-body" style="background-color:#000;color:#fff;">
+                    <div class="card-title"><p style="font-size:15px;">Rating: {{ review.rating}}</p></div>
+                    <p style="font-size:20px;">{{ review.comment }}</p>
+                    <p style="font-size:12px;padding-top:10px;">Reviewed by: {{review.user}} | {{review.movie}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

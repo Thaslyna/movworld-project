@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+Mov
+{% endblock %}
+{% block title %}
+Mov
+{% endblock %}
+{% block body %}
+
+<div class="container" style="padding-top:80px;align:center;">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-5">
+             <div class="shadow card">
+                <div class="card-body">
+                    <div class="card-title" style="color:#fff;"><b>Username:</b> {{user.username}}</div><br>
+                    <p style="color:#fff;"><b>Firstname:</b> {{user.first_name}}</p><br>
+                    <p style="color:#fff;"><b>Lastname:</b> {{user.last_name}}</p><br>
+                    <p style="color:#fff;"><b>Email:</b> {{user.email}}</p><br>
+                    <a class="btn btn-dark" href="{% url 'mov_wo:home' %}">Go back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

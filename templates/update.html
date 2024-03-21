@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+{% if user.is_authenticated  %}
+{{user.username}} you can update movies here.
+{% else %}
+You have to log in first to update movies here.
+{% endif %}
+{% endblock %}
+{% block title %}
+UpdateMovies
+{% endblock %}
+{% block body %}
+<div class="main-w3layouts wrapper" >
+		<h1 style="padding-top:30px;font-weight:bold;">Upadte Movies</h1>
+		<div class="main-agileinfo">
+			<div class="agileits-top">
+            <form action="" method="post" enctype="multipart/form-data" style="text-align: center;display: inline-block;color:#fff;padding-top:5px;">
+                {% csrf_token %}
+                <div class="form-group">
+                   {{mov_fo.as_ul}}
+                <br><button type="submit">Submit</button>
+                </div>
+            </form>
+
+                 <ul class="messages">
+        {% for message in messages %}
+            <p style="padding-top:30px;font-weight:bold;color:#fff;">{{message}}</p>
+        {% endfor %}
+        <a class="btn btn-light" href="{% url 'mov_wo:home' %}">Go back</a>
+    </ul>
+        </div>
+    </div>
+</div>
+<div class="col-4"></div>
+{% endblock %}

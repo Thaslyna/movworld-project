@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+Here You're Login with your username and password.
+{% endblock %}
+{% block title %}
+SignIn
+{% endblock %}
+{% block body %}
+<div class="container signin_con mt-5" style="color:#fff;">
+<form class="login-form" method="post" action="">
+  {% csrf_token %}
+  <p class="login-text">
+    <span class="fa-stack fa-lg">
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-lock fa-stack-1x"></i>
+    </span>
+  </p>
+  <input type="text" class="login-username input-in" autofocus="autofocus" required="required" placeholder="Username" name="username" />
+  <input type="password" class="login-password input-in" required="required" placeholder="Password" name="password"/>
+<!--  <input type="submit" name="Login" value="Login" class="login-submit input-in"  />-->
+  <button type="submit" name="Login" value="Login" class="login-submit input-in">SignIn</button>
+</form>
+	{% if messages %}
+    <div class="alert alert-light">
+		{% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+{% endif %}
+<a href="{% url 'credential:signup' %}" class="login-forgot-pass">Don't have an account? signup here!!!</a>
+<div class="underlay-photo"></div>
+<div class="underlay-black"></div>
+</div>
+
+{% endblock %}

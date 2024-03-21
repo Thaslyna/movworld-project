@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+Movie Details
+{% endblock %}
+{% block title %}
+MovieDetail
+{% endblock %}
+{% block body %}
+
+
+<div class="container" style="padding-top:40px;">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-5">
+            <div class="card bg-dark" style="min-width:30rem;color:#fff;width:200px;box-shadow: 3px 4px 5px #000;align:center;">
+                <img class="card-img-top my-image" style="padding-top:15px;" height="300px" src="{{mov_det.poster.url}}" alt="{{mov_det.title}}"></a>
+                <div class="card-body">
+                    <p style="font-size:20px;font-weight:bold;">{{mov_det.title}}</p>
+                    <h3>{{mov_det.release_date}}</h3>
+                    <h3>{{mov_det.category}}</h3><br>
+                    <p>{{mov_det.desc}}</p>
+                <center><a href="{% url 'add_:update' mov_det.id %}" class="btn btn-light mt-3">Update</a></center>
+                    <center><a href="{% url 'add_:delete' mov_det.id %}" class="btn btn-light mt-3">Delete</a></center>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-5">
+                         <span class="heading" style="color:#fff;">User Reviews and Ratings</span>
+<span class="fa fa-star checked" style="color:#fff;"></span>
+<span class="fa fa-star checked" style="color:#fff;"></span>
+<span class="fa fa-star checked" style="color:#fff;"></span>
+<span class="fa fa-star checked" style="color:#fff;"></span>
+<span class="fa fa-star" style="color:#fff;"></span>
+<p></p>
+<hr style="border:3px solid #fff">
+            {% for review in rev %}
+            <div class="shadow card">
+                <div class="card-body" style="color:#fff;">
+                    <div class="card-title">Rating: {{ review.rating}}</div>
+                    <h3>Review: {{ review.comment }}</h3>
+                    <p>Reviewed by: {{review.user}} | {{review.movie}}</p>
+                </div>
+            </div>
+            {% endfor %}
+     </div>
+    </div>
+</div>
+{% endblock %}

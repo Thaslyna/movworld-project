@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block metadescription %}
+error
+{% endblock %}
+{% block title %}
+Error
+{% endblock %}
+{% block body %}
+<div class="main-w3layouts wrapper" >
+		<div class="main-agileinfo">
+			<div class="agileits-top">
+
+
+    <ul class="messages">
+        {% for message in messages %}
+            <p style="padding-top:30px;font-weight:bold;color:#fff;">{{message}}</p>
+        {% endfor %}
+        <a class="btn btn-light" href="{% url 'mov_wo:home' %}">Go back</a>
+    </ul>
+
+            </div>
+        </div>
+</div>
+{% endblock %}

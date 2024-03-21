@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{%  block metadescription %}Register Your name and details to get in.{% endblock %}
+{% block title %}SignUp{% endblock %}
+{% block body %}
+	<!-- main -->
+	<div class="main-w3layouts wrapper" >
+		<h1 style="padding-top:50px;font-weight:bold;">SignUp</h1>
+			{% if messages %}
+    <div class="alert alert-danger">
+		{% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+{% endif %}
+		<div class="main-agileinfo">
+			<div class="agileits-top">
+				<form action="" method="post">
+					{% csrf_token %}
+					<input class="text" type="text" name="userName" placeholder="Username" required="" autocomplete="off"><br>
+					<input class="text" type="text" name="firstName" placeholder="Firstname" required="" autocomplete="off"><br>
+					<input class="text" type="text" name="lastName" placeholder="Lastname" required="" autocomplete="off">
+					<input class="text email" type="email" name="email" placeholder="Email" required="" autocomplete="off">
+					<input class="text" type="password" name="psw" placeholder="Password" required="">
+					<input class="text w3lpass" type="password" name="psw-repeat" placeholder="Confirm Password" required="">
+					<div class="wthree-text">
+						<label class="anim">
+
+							<span><b>I Agree To The <a href="#">Terms & Conditions</a></b></span>
+						</label>
+						<div class="clear"> </div>
+					</div>
+					<input type="submit" value="SIGNUP">
+				</form>
+
+				<!-- Inside your template -->
+
+				<p>have an Account? <a href="{% url 'credential:signin' %}"> Signin Now!</a></p>
+			</div>
+		</div>
+
+		<ul class="colorlib-bubbles">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+	<!-- //main -->
+
+{% endblock %}

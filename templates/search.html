@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+Search Result
+{% endblock %}
+{% block title %}
+Search
+{% endblock %}
+{% block body %}
+<div class="container" style="padding-top:100px;">
+    <div class="text-center my-search" style="font-weight:bold;color:#fff;">You have searched for <b>"{{query}}"</b></div>
+</div>
+<div class="container" style="padding-top:40px;">
+    <div class="row mx-auto">
+        {% for mov in movie %}
+        <div class="my-bottom-margin col-9 col-sm-12 col-md-6 col-lg-4">
+            <div class="card text-center">
+                <a href="{% url 'rev_rate:movie_details_fun' mov.m_slug %}"><img class="card-img-top my-image" src="{{mov.poster.url}}" width="300" height="300" alt="{{mov.name}}"></a>
+                <div class="card-body">
+                    <div class="my-title" style="color:#fff;">
+                        <h6>{{mov.title}}</h6>
+                        <p>{{mov.category}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        {% empty %}
+    <div class="row mx-auto">
+        <h1 class="text-center my-search" style="font-weight:bold;color:#fff;padding-top:100px;">
+            0 Results Found.</h1>
+        <p class="text-center my-search" style="font-size:15px;font-weight:bold;color:#fff;"><a style="color:#fff;" href="{% url 'mov_wo:home' %}">Click here to go back...</a></p>
+
+    </div>
+
+    {% endfor %}
+</div>
+
+
+{% endblock %}

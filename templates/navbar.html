@@ -1,0 +1,54 @@
+{% load static %}
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-scroll fixed-top shadow-0 border-bottom border-dark navy">
+  <div class="container">
+    <a class="navbar-brand" style="color:black;font-size:30px;font-weight:bold;" href="{% url 'mov_wo:home'%}"><b>MOVWORLD</b></a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mx-auto">
+          <li class="nav-item li_nav">
+     <form class="d-flex" action="{% url 'search_app:search' %}" method="get">
+      {% csrf_token %}
+        <input class="form-control mr-sm-2 nav-item" type="search" autocomplete="off"  name="q" aria-label="Search" required style="background-color:#000;opacity:.5;border: 3px solid #ff4c17;color:white;width:400px;">
+      <button  class="btn btn-outline-dark my-2 my-sm-0 " style="border: 3px solid #ff4c17;background-color: #000;" type="submit" ><i class="fa-solid fa-magnifying-glass" style="color:#ff4c17;"></i></button>
+    </form>
+          </li>
+
+
+        <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" style="color:#000000;">Category</a>
+    <ul class="dropdown-menu" style="background-color:#000;">
+        {% for cat in links %}
+      <li><a class="dropdown-item" style="color:#ff4c17;" href="{{cat.get_url}}">{{cat.category}}</a></li>
+        {% endfor %}
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item" style="color:#ff4c17;" href="{% url 'mov_wo:home' %}">All movies</a></li>
+    </ul>
+  </li>
+
+
+        <li class="nav-item" >
+          <a class="nav-link" href="{% url 'add_:add_mov' %}">AddMovies</a>
+        </li>
+
+        {% if request.user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'credential:user_detail' user.id %}">{{user.username}}</a>
+        </li>
+                <a href="{% url 'credential:sign-out' %}"><button type="button" class="btn btn-dark ms-3 btn-signup" style="letter-spacing:.2em;color:#ff4c17;"><b>SignOut</b></button></a>
+            {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'credential:signin' %}">SignIn</a>
+        </li>
+        <a href="{% url 'credential:signup' %}"><button type="button" class="btn btn-dark ms-3 btn-signup" style="color:#ff4c17;letter-spacing:.2em;"><b>SignUp</b></button></a>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- Navbar -->
+
+<!--Searchbar-->
+
+<!--Searchbar-->
+
+

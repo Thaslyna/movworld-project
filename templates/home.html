@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+{% if mov_cat %}
+{{mov_cat.desc|truncatewords:155}}
+{% else %}
+Welcome to MovWorld
+{% endif %}
+{% endblock %}
+{% block title %}
+{% if mov_cat %}
+{{mov_cat.name}}
+{% else %}
+MovWorld
+{% endif %}
+{% endblock %}
+{% block body %}
+
+
+
+{% if mov_cat %}
+<div class="container">
+    <div class="row">
+  <div class="col-12">
+      <div style="color:#fff;padding-top:100px;">
+    <div class="card">
+
+      <div class="card-body">
+        <h1 class="card-title">{{mov_cat.category}}</h1>
+          <img src="{{mov_cat.img.url}}" width="180" height="220" class="card-img-bottom" alt="{{mov_cat.category}}">
+        <p class="card-text">{{mov_cat.desc}}</p>
+      </div>
+    </div>
+  </div>
+      </div>
+
+</div>
+
+<div class="container" style="">
+    <div class="row">
+        {% for i in mov_list %}
+        <div class="col-12 col-sm-12 col-md-12 col-lg-3 mt-5">
+            <div class="card bg-dark" style="min-width:12rem;color:#fff;width:200px;box-shadow: 3px 4px 5px #000;align:center;">
+                <a href="{{i.get_url}}"><img class="card-img-top my-image" style="padding-top:15px;" height="200px" src="{{i.poster.url}}" alt="{{i.title}}"></a>
+                <div class="card-body">
+                    <p style="font-size:20px;font-weight:bold;">{{i.title}}</p>
+                    <h3>{{i.release_date}}</h3>
+                    <p>{{i.category}}</p><br>
+
+<!--                <center><a href="{% url 'add_:update' i.id %}" class="btn btn-light mt-3">Update</a></center>-->
+<!--                    <center><a href="{% url 'add_:delete' i.id %}" class="btn btn-light mt-3">Delete</a></center>-->
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+{% else %}
+<div class="container" >
+
+    <div class="row mx-auto">
+        <div class="col-md-12">
+            <div style="color:#fff;padding-top:80px;">
+            <br>
+                			{% if messages %}
+    <div class="alert alert-danger">
+		{% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+{% endif %}
+                <center><h1 style="color:#fff;padding-top:40px;font-weight:bold;font-size:30px;">.Movies To Explore.</h1></center>
+            <div style="color:light;padding-top:10px;font-size:15px;">
+
+                <p>The Mov World Review WebApp simple yet efficient platform for movie enthusiasts. It provides a one-stop solution for all your movie reviews and ratings needs. With its user-generated content and easy navigation, the app stands out!!! So, the next time you are in a dilemma about what movie to watch, give Mov World Review App a try, and you won’t be disappointed.</p>
+            </div>
+            </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row mx-auto m-3" style="">
+        {% for i in mov.object_list %}
+        <div class="row col-9 col-sm-12 col-md-12 col-lg-2 m-3">
+            <div class="card bg-dark" style="min-width:12rem;color:#fff;width:200px;box-shadow: 3px 4px 5px #000;align:center;">
+                <img class="card-img-top my-image" style="padding-top:15px;" height="200px" src="{{i.poster.url}}" alt="{{i.title}}">
+                <div class="card-body">
+                    <center><p style="font-size:20px;font-weight:bold;">{{i.title}}</p>
+                    <p>{{i.release_date}}</p>
+                        <p>{{i.category}}</p></center>
+                                        <center><a href="{% url 'rev_rate:movie_details_fun' i.m_slug %}" class="btn btn-light mt-1">Add Review</a></center>
+
+<!--                <center><a href="{% url 'add_:update' i.id %}" class="btn btn-light mt-3">Update</a></center>-->
+<!--                    <center><a href="{% url 'add_:delete' i.id %}" class="btn btn-light mt-3">Delete</a></center>-->
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        </div>
+    </div>
+</div>
+    {% endif %}
+   <div class="mx-auto">
+        {% if mov.paginator.num_pages > 1 %}
+        <div class="text-center">
+            {% for pg in mov.paginator.page_range %}
+            <a href="?page={{pg}}" class="btn btn-light btn-sm {% if mov.number == pg %} active {% endif %}">{{pg}}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+        </div>
+</div>
+{% endblock %}
